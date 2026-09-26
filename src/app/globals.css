@@ -67,25 +67,28 @@
 }
 
 /* ---------- Base ---------- */
-html {
-  background: var(--bg);
-}
+/* In the base layer so Tailwind classes (e.g. outline-none) can override these. */
+@layer base {
+  html {
+    background: var(--bg);
+  }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
 
-::selection {
-  background: var(--accent);
-  color: var(--accent-contrast);
-}
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
 }
 
 /* ---------- Components ---------- */
@@ -98,13 +101,20 @@ body {
     box-shadow: var(--card-shadow);
   }
 
+  /* Hover lift for clickable cards. */
   .card-hover {
     transition:
-      box-shadow 0.3s ease,
-      border-color 0.3s ease;
+      box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .card-hover:hover {
+    transform: translateY(-4px);
     box-shadow: var(--card-shadow-hover);
+  }
+
+  /* Blinking terminal cursor. */
+  .caret {
+    animation: caret-blink 1.1s steps(1) infinite;
   }
 
   /* Liquid glass: controls layer only (nav, buttons, ⌘K menu, terminal card).
@@ -269,7 +279,19 @@ body {
   }
 }
 
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .card-hover:hover {
+    transform: none;
+  }
+  .caret {
+    animation: none;
+  }
   *,
   *::before,
   *::after {
