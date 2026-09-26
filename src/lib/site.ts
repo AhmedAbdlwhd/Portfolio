@@ -15,14 +15,15 @@ export const site = {
   focus: ["NLP", "classical ML", "data analysis"],
   stack: ["Python", "scikit-learn", "pandas", "NLTK", "Streamlit"],
 
-  // DRAFT — edit freely.
   about: [
-    "I care about the part of machine learning that usually gets skipped: making the result usable. A model that scores well in a notebook but can't answer a real question isn't finished.",
-    "My projects reflect that — a chatbot that knows when to say “I don't know”, a translator that survives an API outage, and analyses that check every claim with a number.",
+    "I'm a Computer Engineering student specialising in Artificial Intelligence at UCSI University. What drives me is AI/ML engineering as a whole: training models, building the systems around them, and using AI to automate work people shouldn't have to do by hand.",
+    "I care about the part that usually gets skipped — making the result usable. My projects reflect that: a chatbot that knows when to say “I don't know”, a translator that survives an API outage, and analyses that check every claim with a number.",
+    "I'm working toward an AI/ML engineering role, learning by building one project at a time. I'm open to remote or on-site work, and happy to relocate.",
   ],
 
   // Newest first. Add a line here when something new happens.
   timeline: [
+    { date: "Now", title: "BSc Computer Engineering (Artificial Intelligence)", detail: "UCSI University" },
     { date: "Mar 2026", title: "Built an NLP FAQ chatbot and a desktop translator", detail: "TF-IDF retrieval with confidence scoring; PyQt6 app with API fallback." },
     { date: "Feb 2026", title: "First end-to-end ML and data projects", detail: "Iris classification (93.3% accuracy) and a COVID-19 unemployment analysis." },
     { date: "Feb 2026", title: "Git and GitHub Essentials", detail: "Coursera" },
