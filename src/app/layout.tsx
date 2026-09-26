@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { GlassFilter } from "@/components/glass-filter";
+import { site } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ahmed — Machine Learning Engineer",
-  description: "I build machine-learning tools people can actually use.",
+  title: `${site.name} — ${site.role}`,
+  description: site.tagline,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
