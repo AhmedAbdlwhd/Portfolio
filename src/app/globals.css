@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+/* Dark mode is switched by a `dark` class on <html> (set by the theme toggle). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #f6f6f4;
+  --card: #ffffff;
+  --border: #e6e6e2;
+  --text: #111214;
+  --muted: #5c6068;
+  --accent: #1d1d1f;
+  --accent-contrast: #ffffff;
+  /* Cobalt: only for the glow behind glass and terminal code highlights. */
+  --cobalt: #2f5bff;
+
+  --glass-bg: rgb(255 255 255 / 0.55);
+  --glass-border: rgb(255 255 255 / 0.75);
+  --glass-highlight: rgb(255 255 255 / 0.9);
+  --glass-shadow: 0 8px 32px rgb(17 18 20 / 0.08), 0 1px 2px rgb(17 18 20 / 0.06);
+  --glow-strength: 0.28;
+
+  --card-shadow: 0 1px 2px rgb(17 18 20 / 0.04), 0 8px 24px rgb(17 18 20 / 0.04);
+  --card-shadow-hover: 0 2px 4px rgb(17 18 20 / 0.05), 0 20px 48px rgb(17 18 20 / 0.08);
+
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0b0b0c;
+  --card: #151517;
+  --border: #26262a;
+  --text: #f2f2f0;
+  --muted: #9a9ea6;
+  --accent: #f5f5f7;
+  --accent-contrast: #111214;
+  --cobalt: #5b7cff;
+
+  --glass-bg: rgb(28 28 31 / 0.55);
+  --glass-border: rgb(255 255 255 / 0.12);
+  --glass-highlight: rgb(255 255 255 / 0.16);
+  --glass-shadow: 0 8px 32px rgb(0 0 0 / 0.4), 0 1px 2px rgb(0 0 0 / 0.3);
+  --glow-strength: 0.35;
+
+  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+  --card-shadow-hover: 0 20px 48px rgb(0 0 0 / 0.45);
+
+  color-scheme: dark;
+}
+
+/* Expose tokens to Tailwind: bg-bg, bg-card, border-border, text-muted, text-cobalt… */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-cobalt: var(--cobalt);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --radius-card: 32px;
+}
+
+/* ---------- Base ---------- */
+html {
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- Components ---------- */
+@layer components {
+  /* Solid surface for project cards. */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--card-shadow);
+  }
+
+  /* Liquid glass: controls layer only (nav, buttons, ⌘K menu, terminal card).
+     Frosted everywhere; Chromium adds SVG refraction (see .refraction below). */
+  .glass {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      var(--glass-shadow);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  /* Soft cobalt glow placed behind a glass element. */
+  .glass-glow::before {
+    content: "";
+    position: absolute;
+    inset: 10% 5%;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(60% 60% at 50% 50%, var(--cobalt), transparent 70%);
+    opacity: var(--glow-strength);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  /* Pill button: accent fill. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 2.75rem;
+    padding: 0 1.25rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+  .btn-primary:hover {
+    opacity: 0.88;
+  }
+  .btn-glass {
+    color: var(--text);
+  }
+
+  /* Small mono label / tag. */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    height: 1.625rem;
+    padding: 0 0.625rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+}
+
+/* Chromium only: <html class="refraction"> is set at runtime when supported.
+   The SVG filter #glass-refraction lives in <GlassFilter />. */
+.refraction .glass {
+  -webkit-backdrop-filter: url(#glass-refraction) blur(20px) saturate(180%);
+  backdrop-filter: url(#glass-refraction) blur(20px) saturate(180%);
+}
+
+/* No backdrop-filter at all: fall back to a solid-ish surface. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--card);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
