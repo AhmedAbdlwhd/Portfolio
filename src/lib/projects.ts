@@ -29,8 +29,8 @@ export type Project = {
   featured: boolean;
   order?: number; // lower shows first; unset = after ordered ones, newest first
   repo?: string;
-  live?: string;
-  video?: string;
+  demoUrl?: string; // "Try it live" button + embedded preview
+  demoVideo?: string; // YouTube link or .mp4
   metric?: { value: string; label: string };
   visual?: Visual;
   images: ProjectImage[]; // first one is the cover
@@ -74,8 +74,8 @@ function read(file: string): Project {
     featured: data.featured ?? false,
     order: typeof data.order === "number" ? data.order : undefined,
     repo: data.repo,
-    live: data.live,
-    video: data.video,
+    demoUrl: data.demoUrl || undefined,
+    demoVideo: data.demoVideo || undefined,
     metric: data.metric,
     visual: data.visual,
     images: readImages(file, data.images),

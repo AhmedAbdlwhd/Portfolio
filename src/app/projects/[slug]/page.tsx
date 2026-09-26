@@ -41,7 +41,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/projects/[sl
   const prev = all[index - 1];
   const next = all[index + 1];
   const [cover, ...gallery] = project.images;
-  const { title, summary, tags, stack, date, repo, live, video, metric, visual } = project;
+  const { title, summary, tags, stack, date, repo, demoUrl, demoVideo, metric, visual } = project;
 
   return (
     <article className="mx-auto w-full max-w-5xl px-4 pb-24 pt-12 sm:px-6 sm:pt-16">
@@ -62,19 +62,19 @@ export default async function CaseStudyPage({ params }: PageProps<"/projects/[sl
         <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h1>
         <p className="text-pretty text-xl text-muted">{summary}</p>
         <div className="flex flex-wrap gap-3 pt-2">
-          {live && (
-            <a href={live} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+          {demoUrl && (
+            <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
               Try it live <span aria-hidden="true">↗</span>
               <span className="sr-only">(opens in a new tab)</span>
             </a>
           )}
-          {video && (
+          {demoVideo && (
             <a href="#demo" className="btn btn-glass glass">
               Watch demo
             </a>
           )}
           {repo && (
-            <a href={repo} target="_blank" rel="noopener noreferrer" className={`btn ${live ? "btn-glass glass" : "btn-primary"}`}>
+            <a href={repo} target="_blank" rel="noopener noreferrer" className={`btn ${demoUrl ? "btn-glass glass" : "btn-primary"}`}>
               View code <span aria-hidden="true">↗</span>
               <span className="sr-only">(opens in a new tab)</span>
             </a>
@@ -119,26 +119,26 @@ export default async function CaseStudyPage({ params }: PageProps<"/projects/[sl
         )}
       </div>
 
-      {video && (
+      {demoVideo && (
         <section id="demo" aria-labelledby="demo-title" className="mt-16 scroll-mt-28 space-y-5">
           <h2 id="demo-title" className="text-2xl font-semibold tracking-tight">
             Demo
           </h2>
-          <DemoVideo url={video} title={title} />
+          <DemoVideo url={demoVideo} title={title} />
         </section>
       )}
 
-      {live && (
+      {demoUrl && (
         <section aria-labelledby="live-title" className="mt-16 space-y-5">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <h2 id="live-title" className="text-2xl font-semibold tracking-tight">
               Try it live
             </h2>
-            <a href={live} target="_blank" rel="noopener noreferrer" className="text-sm text-muted hover:text-text">
+            <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted hover:text-text">
               Open in a new tab <span aria-hidden="true">↗</span>
             </a>
           </div>
-          <LiveEmbed url={live} title={title} />
+          <LiveEmbed url={demoUrl} title={title} />
         </section>
       )}
 

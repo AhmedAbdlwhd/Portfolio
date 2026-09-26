@@ -12,10 +12,10 @@ Built to grow — **adding a project means adding one Markdown file**, no code o
 
 ## Features
 
-- **Home** — hero with a glass terminal that types out `profile.json`, a bento grid of featured projects, certifications, about/timeline and contact.
+- **Home** — hero with a glass terminal that types out `profile.json`, a bento grid of featured projects, experience, grouped certifications, about (education, timeline, skills) and contact.
 - **Projects** — every project, filterable by tag (ML, NLP, Data, Apps…).
-- **Case studies** — problem, approach, results, screenshots, optional demo video and live embed, code link.
-- **Live Credly badges** — pulled from my public Credly profile once a day, with a local JSON fallback.
+- **Case studies** — problem, approach, results, screenshots, code link, plus a "Try it live" button and demo video when `demoUrl` / `demoVideo` are set.
+- **Certifications** — live Credly badges (refreshed daily) merged with a local list of other certificates, de-duplicated and grouped by topic.
 - **⌘K / Ctrl+K command menu** — jump to any page or project, copy my email, toggle the theme.
 - **Light and dark mode** — remembered per visitor, with no flash on reload.
 - **Tasteful motion** — page-load and scroll reveals, card hover lift, a chart that draws itself. All of it respects the OS "reduce motion" setting.
@@ -55,8 +55,10 @@ If a required field is missing or an image path is wrong, the build stops with a
 
 | What | Where |
 |---|---|
-| Name, tagline, email, links, about text, timeline, tools | `src/lib/site.ts` |
-| Certifications fallback (used only if Credly is unreachable) | `content/certifications.json` |
+| Name, title, intro, email, links, about, experience, education, skills, timeline | `src/lib/site.ts` |
+| Certificates not on Credly (add new ones here) | `content/certifications.json` |
+| Credly fallback (used only if Credly is unreachable) | `content/credly-fallback.json` |
+| CV — the "Download CV" buttons appear once this file exists | `public/cv.pdf` |
 | Colours, glass effect, fonts | `src/app/globals.css` (design tokens at the top) |
 
 ## Project structure

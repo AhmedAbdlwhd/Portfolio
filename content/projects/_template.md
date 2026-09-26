@@ -14,8 +14,8 @@ featured: false                          # true = also shows in the home page gr
 # order: 1                               # optional — lower numbers show first (otherwise newest first)
 
 repo: https://github.com/AhmedAbdlwhd/my-new-project   # "Code" button
-# live: https://my-app.streamlit.app     # "Try it live" button (+ embedded preview)
-# video: https://www.youtube.com/watch?v=XXXXXXXXXXX  # demo video (YouTube or a .mp4 link)
+# demoUrl: https://my-app.streamlit.app  # "Try it live" button (+ embedded preview) — hidden when empty
+# demoVideo: https://www.youtube.com/watch?v=XXXXXXXXXXX  # demo video (YouTube or a .mp4 link) — optional
 
 # One big number for the card (optional)
 metric:
