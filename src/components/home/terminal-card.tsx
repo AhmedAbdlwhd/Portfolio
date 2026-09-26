@@ -1,35 +1,8 @@
-/** A JSON value split into coloured pieces, one array per line. */
-export type Token = { text: string; kind: "key" | "string" | "number" | "punct" };
-export type Line = Token[];
+"use client";
 
-/** Arrays longer than this (in characters) are printed one item per line. */
-const MAX_INLINE = 36;
-
-/** Turns a flat object into pretty-printed, syntax-coloured JSON lines. */
-export function toJsonLines(obj: Record<string, string | number | readonly string[]>): Line[] {
-  const entries = Object.entries(obj);
-  const p = (text: string): Token => ({ text, kind: "punct" });
-  const value = (v: string | number): Token =>
-    typeof v === "number" ? { text: String(v), kind: "number" } : { text: JSON.stringify(v), kind: "string" };
-
-  const body = entries.flatMap(([k, v], i): Line[] => {
-    const comma = i < entries.length - 1 ? [p(",")] : [];
-    const head = [p("  "), { text: JSON.stringify(k), kind: "key" } as Token, p(": ")];
-    if (!Array.isArray(v)) return [[...head, value(v as string | number), ...comma]];
-
-    if (JSON.stringify(v).length <= MAX_INLINE) {
-      const items = v.flatMap((item, j) => [...(j ? [p(", ")] : []), value(item)]);
-      return [[...head, p("["), ...items, p("]"), ...comma]];
-    }
-    return [
-      [...head, p("[")],
-      ...v.map((item, j) => [p("    "), value(item), ...(j < v.length - 1 ? [p(",")] : [])]),
-      [p("  ]"), ...comma],
-    ];
-  });
-
-  return [[p("{")], ...body, [p("}")]];
-}
+import { useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
+import type { Line, Token } from "@/lib/json-lines";
 
 const colour: Record<Token["kind"], string> = {
   key: "text-cobalt",
@@ -38,8 +11,38 @@ const colour: Record<Token["kind"], string> = {
   punct: "text-muted",
 };
 
+const START_DELAY = 600;
+const PER_CHAR = 55; // typing the command
+const PAUSE = 280; // "pressing enter"
+const PER_LINE = 45; // printing the output
+
+/** Glass terminal that types the command, then prints the JSON line by line. */
 export function TerminalCard({ lines, command }: { lines: Line[]; command: string }) {
+  const reduce = useReducedMotion();
+  const [typed, setTyped] = useState(0);
+  const [shown, setShown] = useState(0);
+
+  useEffect(() => {
+    const timers: number[] = [];
+    const at = (ms: number, fn: () => void) => timers.push(window.setTimeout(fn, ms));
+    // Server and first client render both start empty (no hydration mismatch); reduced motion fills in at once.
+    if (reduce) {
+      at(0, () => {
+        setTyped(command.length);
+        setShown(lines.length);
+      });
+      return () => timers.forEach(clearTimeout);
+    }
+    for (let i = 1; i <= command.length; i++) at(START_DELAY + i * PER_CHAR, () => setTyped(i));
+    const outputStart = START_DELAY + command.length * PER_CHAR + PAUSE;
+    for (let i = 1; i <= lines.length; i++) at(outputStart + i * PER_LINE, () => setShown(i));
+    return () => timers.forEach(clearTimeout);
+  }, [reduce, command.length, lines.length]);
+
+  const done = shown === lines.length;
   const plain = lines.map((l) => l.map((t) => t.text).join("")).join("\n");
+  const caret = <span className="caret ml-px inline-block h-[1.1em] w-[0.55em] translate-y-[0.2em] bg-text/70" />;
+
   return (
     <div className="glass glass-glow w-full rounded-[28px]">
       <div className="flex items-center gap-2 border-b border-[var(--glass-border)] px-5 py-3.5">
@@ -49,23 +52,35 @@ export function TerminalCard({ lines, command }: { lines: Line[]; command: strin
         <span className="ml-3 font-mono text-xs text-muted">~/ahmed — zsh</span>
       </div>
       <div className="overflow-x-auto px-5 py-5 font-mono text-[13px] leading-6 sm:text-sm">
-        <p>
-          <span className="text-muted">$ </span>
-          {command}
+        {/* Screen readers get the full text once; the animated copy is visual only. */}
+        <p className="sr-only">
+          $ {command}
+          {"\n"}
+          {plain}
         </p>
-        {/* Screen readers get the plain text once; the coloured copy is visual only. */}
-        <pre className="sr-only">{plain}</pre>
-        <pre aria-hidden="true" className="whitespace-pre">
-          {lines.map((line, i) => (
-            <div key={i}>
-              {line.map((t, j) => (
-                <span key={j} className={colour[t.kind]}>
-                  {t.text}
-                </span>
-              ))}
-            </div>
-          ))}
-        </pre>
+        <div aria-hidden="true">
+          <p>
+            <span className="text-muted">$ </span>
+            {command.slice(0, typed)}
+            {shown === 0 && caret}
+          </p>
+          <pre className="whitespace-pre">
+            {lines.map((line, i) => (
+              // Hidden lines keep their space, so the card never changes size.
+              <div key={i} className={i < shown ? "" : "invisible"}>
+                {line.map((t, j) => (
+                  <span key={j} className={colour[t.kind]}>
+                    {t.text}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </pre>
+          <p className={done ? "" : "invisible"}>
+            <span className="text-muted">$ </span>
+            {caret}
+          </p>
+        </div>
       </div>
     </div>
   );
