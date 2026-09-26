@@ -57,6 +57,7 @@ If a required field is missing or an image path is wrong, the build stops with a
 |---|---|
 | Name, title, intro, email, links, about, experience, education, skills, timeline | `src/lib/site.ts` |
 | Certificates not on Credly (add new ones here) | `content/certifications.json` |
+| Awards (optional photo in `public/awards/`) | `content/awards.json` |
 | Credly fallback (used only if Credly is unreachable) | `content/credly-fallback.json` |
 | CV — the "Download CV" buttons appear once this file exists | `public/cv.pdf` |
 | Colours, glass effect, fonts | `src/app/globals.css` (design tokens at the top) |
