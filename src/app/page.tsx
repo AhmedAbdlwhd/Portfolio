@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { About } from "@/components/home/about";
 import { Certifications } from "@/components/home/certifications";
 import { Contact } from "@/components/home/contact";
+import { Experience } from "@/components/home/experience";
 import { Featured } from "@/components/home/featured";
 import { Hero } from "@/components/home/hero";
 import { getCertifications } from "@/lib/certifications";
@@ -21,7 +22,8 @@ const personJsonLd = {
   email: `mailto:${site.email}`,
   url: siteUrl,
   sameAs: [site.links.github, site.links.linkedin, site.links.credly],
-  knowsAbout: ["Machine learning", "Natural language processing", "Data analysis", ...site.stack],
+  alumniOf: { "@type": "CollegeOrUniversity", name: "UCSI University" },
+  knowsAbout: site.skills.filter((s) => s.group !== "Languages").flatMap((s) => s.items),
 };
 
 export default async function Home() {
@@ -33,6 +35,7 @@ export default async function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
       <Hero projectCount={projects.length} certCount={certs.length} />
       <Featured projects={getFeaturedProjects()} />
+      <Experience />
       <Certifications certs={certs} />
       <About />
       <Contact />

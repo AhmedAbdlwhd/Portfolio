@@ -1,10 +1,10 @@
 // One place for personal details. Pages and metadata read from here.
 export const site = {
   name: "Ahmed Abdelwahed",
-  role: "AI & ML Engineer",
+  role: "Aspiring AI & ML Engineer",
   tagline: "I build machine-learning tools people can actually use.",
   intro:
-    "Models are only useful when people can use them. I build NLP, classification and data-analysis projects end to end — from clean data to an interface someone can click.",
+    "Computer Engineering (AI) student at UCSI University and former AI Engineer intern at ArpuPlus. I build NLP, classification and data-analysis projects end to end — from clean data to an interface someone can click.",
   email: "ahmed@ajxlabs.com",
   links: {
     github: "https://github.com/AhmedAbdlwhd",
@@ -12,8 +12,9 @@ export const site = {
     credly: "https://www.credly.com/users/ahmedabdlwhd",
   },
   credlyUsername: "ahmedabdlwhd",
-  focus: ["NLP", "classical ML", "data analysis"],
-  stack: ["Python", "scikit-learn", "pandas", "NLTK", "Streamlit"],
+  // Shown in the hero terminal's profile.json.
+  focus: ["NLP", "machine learning", "data analysis"],
+  stack: ["Python", "scikit-learn", "NLTK", "SQL", "AWS"],
 
   about: [
     "I'm a Computer Engineering student specialising in Artificial Intelligence at UCSI University. What drives me is AI/ML engineering as a whole: training models, building the systems around them, and using AI to automate work people shouldn't have to do by hand.",
@@ -21,13 +22,47 @@ export const site = {
     "I'm working toward an AI/ML engineering role, learning by building one project at a time. I'm open to remote or on-site work, and happy to relocate.",
   ],
 
-  // Newest first. Add a line here when something new happens.
+  // Newest first.
+  experience: [
+    {
+      role: "AI Engineer (Internship)",
+      company: "ArpuPlus",
+      companyDetail: "ARPU Telecommunications Services",
+      location: "Cairo, Egypt",
+      type: "On-site",
+      start: "Feb 2026",
+      end: "Apr 2026",
+      points: [
+        "Built and shipped 5 AI/ML projects: data analysis, classification models (Iris, diabetes prediction), an NLP FAQ chatbot and a translation app — applying EDA, supervised learning, agentic AI and NLP with NLTK.",
+        "Contributed to the AI Dubbing Portal for Shofha, an Arabic streaming platform: built the landing page, designed the transcript-verifier UI, resolved audio-clustering issues, evaluated model outputs and documented workflow improvements.",
+      ],
+      // TODO: confirm the exact award wording.
+      award: "Best Evaluator",
+    },
+  ],
+  // Shown as one small line under Experience.
+  earlierExperience: [{ role: "Data Entry Clerk", company: "AMA Trading & Import", location: "Cairo, Egypt", dates: "2018 – 2020" }],
+
+  education: [
+    { degree: "BSc (Hons) Computer Engineering (Artificial Intelligence)", school: "UCSI University", dates: "2024 – 2028 (expected)" },
+    { degree: "Foundation in Science", school: "UCSI University", dates: "2022 – 2023" },
+  ],
+
+  skills: [
+    { group: "AI & ML", items: ["Machine Learning", "Deep Learning", "NLP", "NLTK", "scikit-learn", "Computer Vision", "Generative AI", "Prompt Engineering", "Agentic AI"] },
+    { group: "Data", items: ["Data Analysis", "EDA", "Data Visualization", "SQL", "PostgreSQL", "Jupyter"] },
+    { group: "Development", items: ["Python", "JavaScript", "HTML/CSS", "Git & GitHub", "AWS", "UI/UX Design"] },
+    { group: "Also", items: ["Cybersecurity fundamentals"] },
+    { group: "Languages", items: ["Arabic (native)", "English"] },
+  ],
+
+  // Education, experience and project milestones only. Newest first.
   timeline: [
-    { date: "Now", title: "BSc Computer Engineering (Artificial Intelligence)", detail: "UCSI University" },
+    { date: "Apr 2026", title: "Completed AI Engineer internship", detail: "ArpuPlus — shipped 5 AI/ML projects and contributed to the Shofha AI Dubbing Portal." },
     { date: "Mar 2026", title: "Built an NLP FAQ chatbot and a desktop translator", detail: "TF-IDF retrieval with confidence scoring; PyQt6 app with API fallback." },
     { date: "Feb 2026", title: "First end-to-end ML and data projects", detail: "Iris classification (93.3% accuracy) and a COVID-19 unemployment analysis." },
-    { date: "Feb 2026", title: "Git and GitHub Essentials", detail: "Coursera" },
-    { date: "Jul 2025", title: "Software Engineering Essentials", detail: "Coursera" },
-    { date: "Mar 2025", title: "Google Project Management Professional Certificate", detail: "Coursera" },
+    { date: "Feb 2026", title: "Started AI Engineer internship", detail: "ArpuPlus, ARPU Telecommunications Services — Cairo, Egypt." },
+    { date: "2024", title: "Started BSc (Hons) Computer Engineering (AI)", detail: "UCSI University — expected 2028." },
+    { date: "2022 – 2023", title: "Foundation in Science", detail: "UCSI University" },
   ],
 } as const;
