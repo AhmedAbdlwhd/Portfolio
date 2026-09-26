@@ -9,6 +9,7 @@ import { site } from "@/lib/site";
 
 const links = [
   { href: "/projects", label: "Work" },
+  { href: "/#experience", label: "Experience" },
   { href: "/#certifications", label: "Certifications" },
   { href: "/#about", label: "About" },
   { href: "/#contact", label: "Contact" },
@@ -34,35 +35,25 @@ export function Nav() {
   }, [open]);
 
   const isActive = (href: string) => href === "/projects" && pathname.startsWith("/projects");
-  const initials = site.name
-    .split(" ")
-    .map((w) => w[0])
-    .join("");
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
-      <nav aria-label="Main" className="relative w-full max-w-2xl">
+      <nav aria-label="Main" className="relative w-full max-w-3xl">
         {/* The menu panel is a sibling of the pill, not a child: nested backdrop-filters don't blur the page. */}
         <div className="glass glass-glow rounded-full">
           <div className="flex h-14 items-center justify-between gap-2 pl-5 pr-2.5">
-            <Link
-              href="/"
-              className="font-mono text-sm font-medium tracking-tight"
-              onClick={() => setOpen(false)}
-            >
-              {initials.toLowerCase()}
-              <span className="text-muted">.dev</span>
-              {/* Spoken name starts with the visible text, so voice control ("click aa dot dev") works. */}
-              <span className="sr-only"> — {site.name}, home</span>
+            <Link href="/" className="shrink-0 text-[15px] font-semibold tracking-tight" onClick={() => setOpen(false)}>
+              {site.name}
+              <span className="sr-only">, home</span>
             </Link>
 
-            <ul className="hidden items-center gap-1 sm:flex">
+            <ul className="hidden items-center gap-0.5 lg:flex">
               {links.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
                     aria-current={isActive(l.href) ? "page" : undefined}
-                    className="rounded-full px-3.5 py-2 text-sm text-muted transition-colors hover:text-text aria-[current=page]:text-text aria-[current=page]:bg-text/5"
+                    className="rounded-full px-3 py-2 text-sm text-muted transition-colors hover:text-text aria-[current=page]:text-text aria-[current=page]:bg-text/5"
                   >
                     {l.label}
                   </Link>
@@ -88,7 +79,7 @@ export function Nav() {
               <button
                 ref={menuButton}
                 type="button"
-                className="grid size-9 place-items-center rounded-full hover:bg-text/5 sm:hidden"
+                className="grid size-9 place-items-center rounded-full hover:bg-text/5 lg:hidden"
                 aria-label={open ? "Close menu" : "Open menu"}
                 aria-expanded={open}
                 aria-controls="mobile-menu"
@@ -103,7 +94,7 @@ export function Nav() {
         </div>
 
         {open && (
-          <ul id="mobile-menu" className="glass absolute inset-x-0 top-16 space-y-1 rounded-3xl bg-card/80 p-2 sm:hidden">
+          <ul id="mobile-menu" className="glass absolute inset-x-0 top-16 space-y-1 rounded-3xl bg-card/80 p-2 lg:hidden">
             {links.map((l) => (
               <li key={l.href}>
                 <Link

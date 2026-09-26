@@ -33,7 +33,7 @@ export function useModKey() {
   );
 }
 
-export function CommandMenu({ projects }: { projects: MenuProject[] }) {
+export function CommandMenu({ projects, hasCv = false }: { projects: MenuProject[]; hasCv?: boolean }) {
   const router = useRouter();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -57,8 +57,9 @@ export function CommandMenu({ projects }: { projects: MenuProject[] }) {
     return [
       { id: "home", group: "Pages", label: "Home", run: go("/") },
       { id: "projects", group: "Pages", label: "All projects", keywords: "work portfolio", run: go("/projects") },
+      { id: "experience", group: "Pages", label: "Experience", keywords: "internship arpuplus work", run: go("/#experience") },
       { id: "certs", group: "Pages", label: "Certifications", keywords: "badges credly", run: go("/#certifications") },
-      { id: "about", group: "Pages", label: "About", keywords: "timeline experience", run: go("/#about") },
+      { id: "about", group: "Pages", label: "About", keywords: "timeline education skills", run: go("/#about") },
       { id: "contact", group: "Pages", label: "Contact", keywords: "hire email", run: go("/#contact") },
       ...projects.map(
         (p): Item => ({
@@ -88,8 +89,9 @@ export function CommandMenu({ projects }: { projects: MenuProject[] }) {
       { id: "github", group: "Actions", label: "Open GitHub", keywords: "code repos", run: visit(site.links.github) },
       { id: "linkedin", group: "Actions", label: "Open LinkedIn", run: visit(site.links.linkedin) },
       { id: "credly", group: "Actions", label: "Open Credly profile", keywords: "badges", run: visit(site.links.credly) },
+      ...(hasCv ? [{ id: "cv", group: "Actions" as const, label: "Download CV", keywords: "resume", run: visit("/cv.pdf") }] : []),
     ];
-  }, [projects, router, close, copied]);
+  }, [projects, router, close, copied, hasCv]);
 
   // Every word typed must appear somewhere in the item's text.
   const results = useMemo(() => {
