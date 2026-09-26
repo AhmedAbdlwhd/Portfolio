@@ -48,11 +48,12 @@ export function Nav() {
             <Link
               href="/"
               className="font-mono text-sm font-medium tracking-tight"
-              aria-label={`${site.name} — home`}
               onClick={() => setOpen(false)}
             >
               {initials.toLowerCase()}
               <span className="text-muted">.dev</span>
+              {/* Spoken name starts with the visible text, so voice control ("click aa dot dev") works. */}
+              <span className="sr-only"> — {site.name}, home</span>
             </Link>
 
             <ul className="hidden items-center gap-1 sm:flex">

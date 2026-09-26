@@ -4,7 +4,14 @@ import { formatMonth } from "@/lib/format";
 import type { Project } from "@/lib/projects";
 
 /** Solid white card. Used by the home bento grid and the /projects list. */
-export function ProjectCard({ project, wide = false }: { project: Project; wide?: boolean }) {
+type Props = {
+  project: Project;
+  wide?: boolean;
+  /** Keep heading levels in order: h3 under a section's h2, h2 directly under the page's h1. */
+  headingLevel?: "h2" | "h3";
+};
+
+export function ProjectCard({ project, wide = false, headingLevel: Heading = "h3" }: Props) {
   const { slug, title, summary, tags, date, metric, visual } = project;
   const rest = title.slice(0, title.lastIndexOf(" ") + 1).trimEnd();
   const lastWord = title.slice(title.lastIndexOf(" ") + 1);
@@ -24,7 +31,7 @@ export function ProjectCard({ project, wide = false }: { project: Project; wide?
         </div>
 
         <div className="space-y-2">
-          <h3 className="text-xl font-semibold tracking-tight">
+          <Heading className="text-xl font-semibold tracking-tight">
             {rest && `${rest} `}
             {/* Last word + arrow never wrap apart. */}
             <span className="whitespace-nowrap">
@@ -33,7 +40,7 @@ export function ProjectCard({ project, wide = false }: { project: Project; wide?
                 →
               </span>
             </span>
-          </h3>
+          </Heading>
           <p className="text-muted">{summary}</p>
         </div>
 

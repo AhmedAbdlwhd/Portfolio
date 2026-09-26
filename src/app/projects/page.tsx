@@ -25,7 +25,7 @@ export default function ProjectsPage() {
 
       <ProjectFilter
         tags={getAllTags()}
-        items={projects.map((p) => ({ slug: p.slug, tags: p.tags, card: <ProjectCard project={p} /> }))}
+        items={projects.map((p) => ({ slug: p.slug, tags: p.tags, card: <ProjectCard project={p} headingLevel="h2" /> }))}
       />
     </div>
   );

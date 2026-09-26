@@ -24,8 +24,9 @@ type RevealProps = {
 
 /** Gentle fade + rise. With reduced motion on, Motion skips the movement. */
 export function Reveal({ children, delay = 0, onLoad = false, className }: RevealProps) {
-  // Starting at 0.01 (not 0) keeps the element eligible as the page's "largest paint", which helps page-speed scores.
-  const hidden = { opacity: 0.01, y: 20 };
+  // On load: start at 0.01 (not 0) so the hero stays eligible as the page's "largest paint" (page-speed score).
+  // On scroll: start at 0 so accessibility checkers treat not-yet-revealed content as hidden, not low-contrast.
+  const hidden = { opacity: onLoad ? 0.01 : 0, y: 20 };
   const shown = { opacity: 1, y: 0 };
   return (
     <m.div
