@@ -19,7 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.role}`,
+  // Pages set a short title ("Projects"); the template adds the name.
+  title: { default: `${site.name} — ${site.role}`, template: `%s — ${site.name}` },
   description: site.tagline,
 };
 
