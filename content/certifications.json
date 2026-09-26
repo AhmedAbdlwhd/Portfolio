@@ -1,0 +1,73 @@
+[
+  {
+    "name": "Foundations of Cybersecurity",
+    "issuer": "Google",
+    "date": "2026-08-23",
+    "category": "Security",
+    "url": "https://www.coursera.org/account/accomplishments/verify/BPQ6U21LNLTD"
+  },
+  {
+    "name": "Google AI",
+    "issuer": "Google",
+    "date": "2026-07-11",
+    "category": "AI & ML",
+    "url": "https://www.coursera.org/account/accomplishments/professional-cert/OI2SC6KDFZRO"
+  },
+  {
+    "name": "AWS AI Practitioner Challenge",
+    "issuer": "Udacity",
+    "date": "2026-06-17",
+    "category": "AI & ML",
+    "url": "https://www.udacity.com/certificate/e/a2b1dd4c-27e9-11f1-8217-432acd206689"
+  },
+  {
+    "name": "SQL for Beginners",
+    "issuer": "Packt",
+    "date": "2026-04-28",
+    "category": "Data",
+    "url": "https://www.coursera.org/account/accomplishments/verify/IP4AX2ECN331"
+  },
+  {
+    "name": "Machine Learning Specialization",
+    "issuer": "DeepLearning.AI",
+    "date": "2026-02-17",
+    "category": "AI & ML",
+    "url": "https://www.coursera.org/account/accomplishments/specialization/WBUYIG1IUPUQ"
+  },
+  {
+    "name": "Tools for Data Science",
+    "issuer": "IBM",
+    "date": "2026-02-16",
+    "category": "Data",
+    "url": "https://www.coursera.org/account/accomplishments/verify/1C4YTUA6VWPZ"
+  },
+  {
+    "name": "What is Data Science?",
+    "issuer": "IBM",
+    "date": "2026-02-10",
+    "category": "Data",
+    "url": "https://www.coursera.org/account/accomplishments/verify/BQ3JFY709QFC"
+  },
+  {
+    "name": "Google AI Essentials",
+    "issuer": "Google",
+    "date": "2026-02-06",
+    "category": "AI & ML",
+    "url": "https://www.coursera.org/account/accomplishments/specialization/8X4GDRUUIX88"
+  },
+  {
+    "name": "Getting Started with Git and GitHub",
+    "issuer": "IBM",
+    "date": "2026-02-01",
+    "category": "Development",
+    "url": "https://www.coursera.org/account/accomplishments/verify/2EVK5UOGOJE8",
+    "sameAsCredly": "Git and GitHub Essentials"
+  },
+  {
+    "name": "Introduction to HTML, CSS & JavaScript",
+    "issuer": "IBM",
+    "date": "2026-01-27",
+    "category": "Development",
+    "url": "https://www.coursera.org/account/accomplishments/verify/1QXACHYM6MOA"
+  }
+]

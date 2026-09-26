@@ -5,7 +5,13 @@
     "issuer": "Coursera",
     "issuedAt": "2026-02-02",
     "image": "https://images.credly.com/images/9a0255eb-a47d-4f3a-9611-243bfe3eb9e4/image.png",
-    "skills": ["Git", "GitHub", "Collaboration", "Pull Requests"]
+    "skills": [
+      "Git",
+      "GitHub",
+      "Collaboration",
+      "Pull Requests"
+    ],
+    "category": "Development"
   },
   {
     "id": "d3d75a1e-17b3-404b-9354-a991179b24e5",
@@ -13,7 +19,12 @@
     "issuer": "Coursera",
     "issuedAt": "2025-07-26",
     "image": "https://images.credly.com/images/1b67aaf9-670d-4c92-8d51-7ac1190f0a42/image.png",
-    "skills": ["SDLC", "Software Architecture", "Programming Concepts"]
+    "skills": [
+      "SDLC",
+      "Software Architecture",
+      "Programming Concepts"
+    ],
+    "category": "Development"
   },
   {
     "id": "5d387a16-53c5-492a-b50f-a2dfd372c9c6",
@@ -21,6 +32,11 @@
     "issuer": "Coursera",
     "issuedAt": "2025-03-13",
     "image": "https://images.credly.com/images/a34119f2-402f-4443-8555-ccfe2520f1df/GCC_badge_PGM_1000x1000.png",
-    "skills": ["Agile Project Management", "Effective Communication", "Process Improvement"]
+    "skills": [
+      "Agile Project Management",
+      "Effective Communication",
+      "Process Improvement"
+    ],
+    "category": "Other"
   }
 ]
