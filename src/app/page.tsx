@@ -12,7 +12,7 @@ const swatches = [
 
 export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-5xl px-6 py-20 space-y-16">
+    <div className="mx-auto w-full max-w-5xl px-6 py-20 space-y-16">
       <header className="space-y-3">
         <p className="font-mono text-sm text-muted">phase-1 / design-tokens</p>
         <h1 className="text-5xl font-semibold tracking-tight">
@@ -58,6 +58,6 @@ export default function Home() {
         <p className="font-mono text-xs text-muted">solid card · 32px corners</p>
         <p className="mt-2 text-2xl font-semibold">Project cards stay solid white.</p>
       </section>
-    </main>
+    </div>
   );
 }
