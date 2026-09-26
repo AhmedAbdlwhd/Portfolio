@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { THEME_STORAGE_KEY as STORAGE_KEY } from "@/lib/theme-script";
+import { THEME_STORAGE_KEY as STORAGE_KEY, setThemeColor } from "@/lib/theme-script";
 
 function subscribe(onChange: () => void) {
   const observer = new MutationObserver(onChange);
@@ -18,6 +18,7 @@ export function useIsDark() {
 export function toggleTheme() {
   const dark = !isDark();
   document.documentElement.classList.toggle("dark", dark);
+  setThemeColor(dark);
   try {
     localStorage.setItem(STORAGE_KEY, dark ? "dark" : "light");
   } catch {}
