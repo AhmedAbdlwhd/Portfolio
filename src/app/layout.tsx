@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { CommandMenu } from "@/components/command-menu";
 import { Footer } from "@/components/footer";
 import { GlassFilter } from "@/components/glass-filter";
+import { MotionProvider } from "@/components/motion";
 import { Nav } from "@/components/nav";
+import { getProjects } from "@/lib/projects";
 import { site } from "@/lib/site";
 import { themeInitScript } from "@/lib/theme-script";
 import "./globals.css";
@@ -43,11 +46,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <GlassFilter />
-        <Nav />
-        <main id="main" className="flex-1 pt-24">
-          {children}
-        </main>
-        <Footer />
+        <MotionProvider>
+          <Nav />
+          <main id="main" className="flex-1 pt-24">
+            {children}
+          </main>
+          <Footer />
+          <CommandMenu projects={getProjects().map(({ slug, title, tags }) => ({ slug, title, tags }))} />
+        </MotionProvider>
       </body>
     </html>
   );

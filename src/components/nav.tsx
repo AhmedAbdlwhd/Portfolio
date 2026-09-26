@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { openCommandMenu, useModKey } from "@/components/command-menu";
 import { ThemeToggle } from "@/components/theme";
 import { site } from "@/lib/site";
 
@@ -15,6 +16,7 @@ const links = [
 
 export function Nav() {
   const pathname = usePathname();
+  const mod = useModKey();
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
 
@@ -68,6 +70,19 @@ export function Nav() {
             </ul>
 
             <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={openCommandMenu}
+                aria-label={`Search and jump (${mod === "⌘" ? "Command" : "Control"} K)`}
+                aria-keyshortcuts={mod === "⌘" ? "Meta+K" : "Control+K"}
+                className="flex h-9 items-center gap-2 rounded-full px-2.5 text-muted transition-colors hover:bg-text/5 hover:text-text"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m20 20-3.5-3.5" />
+                </svg>
+                <kbd className="hidden font-mono text-xs md:inline">{mod === "⌘" ? "⌘K" : "Ctrl K"}</kbd>
+              </button>
               <ThemeToggle />
               <button
                 ref={menuButton}
