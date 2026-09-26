@@ -1,7 +1,7 @@
 // One place for personal details. Pages and metadata read from here.
 export const site = {
   name: "Ahmed Abdelwahed",
-  role: "Machine Learning Engineer",
+  role: "AI & ML Engineer",
   tagline: "I build machine-learning tools people can actually use.",
   intro:
     "Models are only useful when people can use them. I build NLP, classification and data-analysis projects end to end — from clean data to an interface someone can click.",

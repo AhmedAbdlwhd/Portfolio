@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   description: `${site.tagline} NLP, machine-learning and data-analysis projects by ${site.name}.`,
   applicationName: site.name,
   authors: [{ name: site.name, url: site.links.linkedin }],
-  keywords: ["machine learning engineer", "NLP", "data analysis", "Python", "scikit-learn", "portfolio", site.name],
+  keywords: ["AI engineer", "machine learning engineer", "NLP", "data analysis", "Python", "scikit-learn", "portfolio", site.name],
   openGraph: {
     type: "website",
     siteName: site.name,
