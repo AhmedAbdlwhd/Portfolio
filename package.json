@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
+    "image-size": "^2.0.4",
+    "marked": "^18.0.14",
     "motion": "^13.4.4",
     "next": "16.3.6",
     "react": "19.2.8",

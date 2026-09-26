@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { imageSize } from "image-size";
 
 /**
  * Projects live in /content/projects, one Markdown file each.
@@ -14,6 +15,9 @@ export type Visual =
   | { type: "matrix"; data: number[][]; labels: string[] }
   | { type: "chat"; question: string; answer: string; note?: string }
   | { type: "words"; words: string[] };
+
+/** Screenshot or chart stored in /public. Width and height are read from the file automatically. */
+export type ProjectImage = { src: string; alt: string; caption?: string; width: number; height: number };
 
 export type Project = {
   slug: string;
@@ -29,6 +33,7 @@ export type Project = {
   video?: string;
   metric?: { value: string; label: string };
   visual?: Visual;
+  images: ProjectImage[]; // first one is the cover
   body: string; // Markdown case study
 };
 
@@ -36,6 +41,19 @@ const DIR = path.join(process.cwd(), "content", "projects");
 
 function fail(file: string, msg: string): never {
   throw new Error(`content/projects/${file}: ${msg}`);
+}
+
+function readImages(file: string, list: unknown): ProjectImage[] {
+  if (list === undefined) return [];
+  if (!Array.isArray(list)) fail(file, `"images" must be a list`);
+  return list.map((img, i) => {
+    if (typeof img?.src !== "string" || !img.src.startsWith("/")) fail(file, `images[${i}].src must start with "/" (a file in /public)`);
+    if (typeof img.alt !== "string" || !img.alt) fail(file, `images[${i}].alt is required — describe the image for screen readers`);
+    const onDisk = path.join(process.cwd(), "public", img.src);
+    if (!fs.existsSync(onDisk)) fail(file, `images[${i}]: public${img.src} does not exist`);
+    const { width, height } = imageSize(fs.readFileSync(onDisk));
+    return { src: img.src, alt: img.alt, caption: img.caption, width, height };
+  });
 }
 
 function read(file: string): Project {
@@ -60,6 +78,7 @@ function read(file: string): Project {
     video: data.video,
     metric: data.metric,
     visual: data.visual,
+    images: readImages(file, data.images),
     body: content.trim(),
   };
 }
@@ -88,9 +107,4 @@ export function getProject(slug: string): Project | undefined {
 
 export function getAllTags(): string[] {
   return [...new Set(getProjects().flatMap((p) => p.tags))].sort();
-}
-
-export function formatMonth(date: string) {
-  const [y, m] = date.split("-").map(Number);
-  return new Date(y, m - 1).toLocaleString("en-US", { month: "short", year: "numeric" });
 }

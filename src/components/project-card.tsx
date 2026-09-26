@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ProjectVisual } from "@/components/project-visual";
-import { formatMonth, type Project } from "@/lib/projects";
+import { formatMonth } from "@/lib/format";
+import type { Project } from "@/lib/projects";
 
 /** Solid white card. Used by the home bento grid and the /projects list. */
 export function ProjectCard({ project, wide = false }: { project: Project; wide?: boolean }) {

@@ -15,6 +15,10 @@ visual:
   question: How do I enroll?
   answer: "Matched → “How can I apply for admission?”"
   note: paraphrase understood via lemmas + synonyms
+images:
+  - src: /projects/faq-chatbot/screenshot.png
+    alt: Streamlit chat app answering "How do I apply for admission?" at 100% confidence and "What are the tuition fees?" at 89.44%, and replying with a safe fallback to "Who won the World Cup?", with an unknown-questions log in the sidebar.
+    caption: Two confident answers, one honest "I don't know" — and the unknown question logged in the sidebar.
 ---
 
 ## Problem
@@ -32,6 +36,7 @@ Students ask the same questions over and over. Staff spend time repeating answer
 ## Results
 
 - Paraphrased questions like *"How do I enroll?"* land on the right FAQ without training a model or calling an API.
+- In the demo, *"How do I apply for admission?"* matches at 100% confidence and *"What are the tuition fees?"* at 89.44%. An off-topic question (*"Who won the World Cup?"*) scores 0% and gets the fallback — and is logged.
 - The knowledge base is a CSV: editing `data/faqs.csv` changes the bot's answers with no code changes.
 
 ## What I learned

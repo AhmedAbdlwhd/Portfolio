@@ -15,6 +15,13 @@ visual:
   unit: "%"
   labels: [May 19, Jun, Jul, Aug, Sep, Oct, Nov, Dec, Jan 20, Feb, Mar, Apr, May, Jun]
   data: [8.9, 9.3, 9.0, 9.6, 9.1, 9.9, 9.9, 9.5, 10.0, 10.0, 10.7, 23.6, 24.9, 11.9]
+images:
+  - src: /projects/unemployment-analysis/before-during.png
+    alt: Line chart of India's average unemployment rate. Before COVID-19 it stays between 9 and 10 percent from mid-2019 to March 2020; during COVID-19 it jumps to about 24 to 25 percent in April and May 2020, then falls to about 12 percent in June.
+    caption: The national average, before and during the COVID-19 lockdown.
+  - src: /projects/unemployment-analysis/boxplot-2020.png
+    alt: Box plots of state unemployment rates for each month of 2020. January to March medians sit below 10 percent; April and May medians rise to about 18 to 20 percent with a much wider spread and outliers above 70 percent; June falls back to about 10 percent.
+    caption: In April and May the spread between states exploded, not just the average.
 ---
 
 ## Problem

@@ -42,6 +42,13 @@ metric:
 # visual:
 #   type: words                          # a few words/phrases
 #   words: [Hello, Bonjour]
+
+# Screenshots or charts (optional). Put the files in /public/projects/<this-file-name>/
+# The first image is the cover at the top of the case study page.
+# images:
+#   - src: /projects/my-new-project/screenshot.png
+#     alt: Describe what the image shows, for people using screen readers.   # required
+#     caption: Optional short caption under the image.
 ---
 
 ## Problem

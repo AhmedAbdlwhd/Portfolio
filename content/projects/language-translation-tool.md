@@ -13,6 +13,10 @@ metric:
 visual:
   type: words
   words: [Hello, مرحبا, Bonjour]
+images:
+  - src: /projects/language-translation-tool/screenshot.png
+    alt: Dark-themed desktop app translating "Welcome to the library. The museum opens at nine in the morning." from English to French, with Copy and Speak buttons and a "Translation completed." status.
+    caption: English → French, with one-click copy and read-aloud.
 ---
 
 ## Problem

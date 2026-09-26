@@ -17,6 +17,10 @@ visual:
     - [20, 0, 0]
     - [0, 19, 1]
     - [0, 3, 17]
+images:
+  - src: /projects/iris-flower-classification/confusion-matrix.png
+    alt: Confusion matrix on the test set, 93.3% accuracy. Setosa 20 of 20 correct; versicolor 19 correct and 1 predicted as virginica; virginica 17 correct and 3 predicted as versicolor.
+    caption: All 4 errors are between versicolor and virginica, whose measurements overlap.
 ---
 
 ## Problem
