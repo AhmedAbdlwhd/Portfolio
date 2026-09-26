@@ -6,10 +6,11 @@ import { Footer } from "@/components/footer";
 import { GlassFilter } from "@/components/glass-filter";
 import { MotionProvider } from "@/components/motion";
 import { Nav } from "@/components/nav";
+import { hasCv } from "@/lib/cv";
 import { getProjects } from "@/lib/projects";
 import { site } from "@/lib/site";
 import { siteUrl } from "@/lib/site-url";
-import { themeInitScript } from "@/lib/theme-script";
+import { THEME_COLORS, themeInitScript } from "@/lib/theme-script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -40,12 +41,8 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F6F6F4" },
-    { media: "(prefers-color-scheme: dark)", color: "#0B0B0C" },
-  ],
-};
+// Light by default; the theme script and toggle switch it to dark when the site is dark.
+export const viewport: Viewport = { themeColor: THEME_COLORS.light };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -72,7 +69,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
           </main>
           <Footer />
-          <CommandMenu projects={getProjects().map(({ slug, title, tags }) => ({ slug, title, tags }))} />
+          <CommandMenu projects={getProjects().map(({ slug, title, tags }) => ({ slug, title, tags }))} hasCv={hasCv()} />
         </MotionProvider>
       </body>
     </html>

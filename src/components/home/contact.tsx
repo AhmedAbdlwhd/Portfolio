@@ -1,4 +1,5 @@
 import { CopyButton } from "@/components/copy-button";
+import { CvButton } from "@/components/cv-button";
 import { Reveal } from "@/components/motion";
 import { site } from "@/lib/site";
 
@@ -6,7 +7,7 @@ export function Contact() {
   return (
     <section id="contact" aria-labelledby="contact-title" className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 py-16 sm:px-6 sm:py-24">
       <Reveal className="card relative overflow-hidden px-6 py-14 text-center sm:px-12 sm:py-20">
-        <p className="font-mono text-xs uppercase tracking-widest text-muted">04 / Contact</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-muted">05 / Contact</p>
         <h2 id="contact-title" className="mx-auto mt-3 max-w-2xl text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
           Let&apos;s build something people will use.
         </h2>
@@ -18,6 +19,7 @@ export function Contact() {
             {site.email}
           </a>
           <CopyButton text={site.email} label="Copy email" />
+          <CvButton />
         </div>
         <ul className="mt-8 flex justify-center gap-6 text-sm">
           <li>

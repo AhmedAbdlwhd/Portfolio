@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CvButton } from "@/components/cv-button";
 import { TerminalCard } from "@/components/home/terminal-card";
 import { Reveal } from "@/components/motion";
 import { toJsonLines } from "@/lib/json-lines";
@@ -38,6 +39,7 @@ export function Hero({ projectCount, certCount }: { projectCount: number; certCo
           <Link href="/#contact" className="btn btn-glass glass">
             Get in touch
           </Link>
+          <CvButton />
         </Reveal>
       </div>
 
