@@ -1,7 +1,10 @@
 import { Section } from "@/components/section";
+import { getAwards, medal } from "@/lib/awards";
+import { formatMonth } from "@/lib/format";
 import { site } from "@/lib/site";
 
 export function Experience() {
+  const awards = getAwards();
   return (
     <Section id="experience" eyebrow="02 / Experience" title="Experience">
       <div className="space-y-4">
@@ -30,17 +33,24 @@ export function Experience() {
               ))}
             </ul>
 
-            {job.award && (
-              <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-bg px-4 py-2 text-sm">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <circle cx="12" cy="9" r="6" />
-                  <path d="m8.5 14.5-1.5 7 5-3 5 3-1.5-7" />
-                </svg>
-                <span>
-                  <span className="text-muted">Award:</span> <span className="font-medium">{job.award}</span>
-                </span>
-              </p>
-            )}
+            {awards
+              .filter((a) => a.company === job.company)
+              .map((a) => (
+                <p
+                  key={a.title}
+                  className="mt-6 flex items-start gap-3 rounded-2xl border border-border bg-bg px-4 py-3 text-sm sm:items-center"
+                >
+                  {medal(a.place) && (
+                    <span aria-hidden="true" className="grid size-8 shrink-0 place-items-center rounded-full border border-border bg-card text-base">
+                      {medal(a.place)}
+                    </span>
+                  )}
+                  <span className="min-w-0">
+                    <span className="font-medium">{a.title}</span>
+                    <span className="text-muted"> · {formatMonth(a.date)}</span>
+                  </span>
+                </p>
+              ))}
           </article>
         ))}
 

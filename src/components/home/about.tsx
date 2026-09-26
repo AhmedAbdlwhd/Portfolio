@@ -1,9 +1,13 @@
+import Image from "next/image";
 import { Section } from "@/components/section";
+import { getAwards, medal } from "@/lib/awards";
+import { formatMonth } from "@/lib/format";
 import { site } from "@/lib/site";
 
 const label = "mb-4 font-mono text-xs uppercase tracking-widest text-muted";
 
 export function About() {
+  const awards = getAwards();
   return (
     <Section id="about" eyebrow="04 / About" title="About me">
       <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
@@ -29,6 +33,42 @@ export function About() {
               ))}
             </ul>
           </div>
+
+          {awards.length > 0 && (
+            <div>
+              <h3 className={label}>Awards</h3>
+              <ul className="space-y-3">
+                {awards.map((a) => (
+                  <li key={a.title} className="card overflow-hidden !rounded-[24px]">
+                    {a.image && (
+                      <Image
+                        src={a.image.src}
+                        alt={a.image.alt}
+                        width={a.image.width}
+                        height={a.image.height}
+                        sizes="(min-width: 1024px) 480px, 100vw"
+                        className="h-auto w-full"
+                      />
+                    )}
+                    <div className="flex gap-4 p-5">
+                      {medal(a.place) && (
+                        <span aria-hidden="true" className="grid size-11 shrink-0 place-items-center rounded-full border border-border bg-bg text-xl">
+                          {medal(a.place)}
+                        </span>
+                      )}
+                      <div className="min-w-0">
+                        <p className="font-semibold leading-snug">{a.title}</p>
+                        <p className="mt-1 text-sm text-muted">
+                          {a.issuer} · <span className="font-mono text-xs">{formatMonth(a.date)}</span>
+                        </p>
+                        <p className="mt-3 text-pretty text-sm text-muted">{a.description}</p>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         <div>

@@ -36,8 +36,7 @@ export const site = {
         "Built and shipped 5 AI/ML projects: data analysis, classification models (Iris, diabetes prediction), an NLP FAQ chatbot and a translation app — applying EDA, supervised learning, agentic AI and NLP with NLTK.",
         "Contributed to the AI Dubbing Portal for Shofha, an Arabic streaming platform: built the landing page, designed the transcript-verifier UI, resolved audio-clustering issues, evaluated model outputs and documented workflow improvements.",
       ],
-      // TODO: confirm the exact award wording.
-      award: "Best Evaluator",
+      // Awards for this job come from content/awards.json (matched by company).
     },
   ],
   // Shown as one small line under Experience.
@@ -58,6 +57,7 @@ export const site = {
 
   // Education, experience and project milestones only. Newest first.
   timeline: [
+    { date: "Jun 2026", title: "Won 1st place, AI Dubbing System Evaluation Challenge", detail: "ArpuPlus — company-wide challenge for the Shofha AI dubbing system." },
     { date: "Apr 2026", title: "Completed AI Engineer internship", detail: "ArpuPlus — shipped 5 AI/ML projects and contributed to the Shofha AI Dubbing Portal." },
     { date: "Mar 2026", title: "Built an NLP FAQ chatbot and a desktop translator", detail: "TF-IDF retrieval with confidence scoring; PyQt6 app with API fallback." },
     { date: "Feb 2026", title: "First end-to-end ML and data projects", detail: "Iris classification (93.3% accuracy) and a COVID-19 unemployment analysis." },
