@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { CommandMenu } from "@/components/command-menu";
@@ -8,6 +8,7 @@ import { MotionProvider } from "@/components/motion";
 import { Nav } from "@/components/nav";
 import { getProjects } from "@/lib/projects";
 import { site } from "@/lib/site";
+import { siteUrl } from "@/lib/site-url";
 import { themeInitScript } from "@/lib/theme-script";
 import "./globals.css";
 
@@ -22,9 +23,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   // Pages set a short title ("Projects"); the template adds the name.
   title: { default: `${site.name} — ${site.role}`, template: `%s — ${site.name}` },
-  description: site.tagline,
+  description: `${site.tagline} NLP, machine-learning and data-analysis projects by ${site.name}.`,
+  applicationName: site.name,
+  authors: [{ name: site.name, url: site.links.linkedin }],
+  keywords: ["machine learning engineer", "NLP", "data analysis", "Python", "scikit-learn", "portfolio", site.name],
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    locale: "en_US",
+    title: `${site.name} — ${site.role}`,
+    description: site.tagline,
+  },
+  twitter: { card: "summary_large_image" },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F6F6F4" },
+    { media: "(prefers-color-scheme: dark)", color: "#0B0B0C" },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
