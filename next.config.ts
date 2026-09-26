@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    // Credly badge images.
+    remotePatterns: [new URL("https://images.credly.com/**")],
+  },
 };
 
 export default nextConfig;
